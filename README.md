@@ -58,6 +58,33 @@ The application includes a complete authentication system with:
 
 Currently, the application uses mock data and simulated authentication. To connect it to a real backend:
 
+### AI Prediction Model Integration
+
+The application includes integration with a Python machine learning model that predicts equipment time to failure:
+
+1. **Python API Server Setup**
+   - Install Python dependencies (Flask, scikit-learn, pandas, etc.):
+     ```
+     pip install -r requirements.txt
+     ```
+   - Start the Python API server:
+     - On Windows: Run `start_api_server.bat`
+     - On Unix/Linux/Mac: Run `sh start_api_server.sh`
+     
+2. **Using the AI Prediction Feature**
+   - Navigate to the "AI Prediction" page from the navigation menu
+   - Enter equipment parameters to get a prediction of time to failure
+   - The model returns an estimate of days until equipment failure
+   - Based on predicted days, appropriate maintenance recommendations are displayed
+
+3. **Customizing the AI Model**
+   - The machine learning model is located at `src/components/predict_api.py`
+   - The React frontend communicates with the model via the API endpoint at `http://localhost:5000/predict`
+   - To replace the model with your own:
+     1. Train your new model and save it as a joblib file
+     2. Update the model loading path in `predict_api.py`
+     3. Ensure your model accepts the same input features or update the API accordingly
+
 ### API Endpoints Required
 
 1. **Authentication Endpoints**

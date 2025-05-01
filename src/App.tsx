@@ -6,6 +6,7 @@ import Register from './pages/Register';
 import OrganizationProfile from './pages/OrganizationProfile';
 import UserManagement from './components/UserManagement';
 import Dashboard from './pages/Dashboard';
+import Prediction from './pages/Prediction';
 
 // Protected route component
 const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -56,6 +57,9 @@ const MainLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
                 </a>
                 <a href="/equipment" className="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
                   Equipment
+                </a>
+                <a href="/prediction" className="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                  AI Prediction
                 </a>
                 <a href="/maintenance" className="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
                   Maintenance
@@ -111,6 +115,14 @@ const App: React.FC = () => {
             <ProtectedRoute>
               <MainLayout>
                 <Dashboard />
+              </MainLayout>
+            </ProtectedRoute>
+          } />
+          
+          <Route path="/prediction" element={
+            <ProtectedRoute>
+              <MainLayout>
+                <Prediction />
               </MainLayout>
             </ProtectedRoute>
           } />

@@ -4,7 +4,6 @@ import random
 import math
 import hashlib
 import time
-import uuid
 
 app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes
@@ -47,13 +46,6 @@ def get_machine_coefficients(machine_name):
 
 @app.route('/predict', methods=['POST'])
 def predict():
-    # Generate a unique ID for this prediction request to ensure uniqueness
-    request_id = str(uuid.uuid4())
-    current_time = time.time()
-    
-    # Explicitly ensure we're using a different random seed for each request
-    random.seed(current_time + hash(request_id))
-    
     data = request.json
     
     # Extract machine name
@@ -83,9 +75,9 @@ def predict():
         - coef['cost_factor'] * cost_per_hour
     )
     
-    # Add significant randomness to each prediction (±25% variation)
-    variation_factor = random.uniform(0.75, 1.25)
-    predicted_days = predicted_days * variation_factor
+    # Add time-based randomness (each prediction will be slightly different)
+    random.seed(time.time())
+    predicted_days += random.uniform(-30, 30)
     
     # Apply some logic based on machine name (certain words imply different machinery types)
     machine_lower = machine_name.lower()
@@ -106,40 +98,18 @@ def predict():
     # Round to integer for better presentation
     predicted_days = round(predicted_days)
     
-    print(f"Prediction request received for machine: {machine_name} (ID: {request_id})")
-    print(f"Time: {time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(current_time))}")
+    print(f"Prediction request received for machine: {machine_name}")
     print(f"Input features: {data}")
     print(f"Machine-specific coefficients: {coef}")
-    print(f"Variation factor: {variation_factor:.2f}")
     print(f"Predicted time to failure: {predicted_days} days")
-    print("-" * 50)
     
-    # Add cache-busting headers to response
-    response = jsonify({
+    return jsonify({
         'predicted_time_to_failure_days': predicted_days,
-        'machine_name': machine_name,
-        'request_id': request_id,
-        'timestamp': current_time
+        'machine_name': machine_name
     })
-    
-    # Set cache control headers to prevent caching
-    response.headers['Cache-Control'] = 'no-store, no-cache, must-revalidate, max-age=0'
-    response.headers['Pragma'] = 'no-cache'
-    response.headers['Expires'] = '0'
-    
-    return response
-
-@app.after_request
-def add_header(response):
-    # Add cache-busting headers to all responses
-    response.headers['Cache-Control'] = 'no-store, no-cache, must-revalidate, max-age=0'
-    response.headers['Pragma'] = 'no-cache'
-    response.headers['Expires'] = '0'
-    return response
 
 if __name__ == '__main__':
     print("Starting mock prediction API server...")
     print("This version uses a sophisticated formula with machine-specific factors")
     print("API available at http://localhost:5000/predict")
-    print("Each prediction will have significant random variation for more realistic results")
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=True) 

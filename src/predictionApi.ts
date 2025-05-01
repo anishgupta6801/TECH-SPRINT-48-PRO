@@ -1,5 +1,6 @@
 // src/services/predictionApi.ts
 export async function predictTimeToFailure(features: {
+  machine_name: string;
   age_years: number;
   usage_hours: number;
   last_maintenance_days: number;
@@ -8,9 +9,18 @@ export async function predictTimeToFailure(features: {
   quality_issues: number;
   cost_per_hour: number;
 }) {
-  const response = await fetch('http://localhost:5000/predict', {
+  // Add a timestamp to prevent caching
+  const timestamp = new Date().getTime();
+  const url = `http://localhost:5000/predict?t=${timestamp}`;
+  
+  const response = await fetch(url, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 
+      'Content-Type': 'application/json',
+      'Cache-Control': 'no-cache, no-store, must-revalidate', 
+      'Pragma': 'no-cache',
+      'Expires': '0'
+    },
     body: JSON.stringify(features),
   });
 
@@ -18,5 +28,5 @@ export async function predictTimeToFailure(features: {
     throw new Error('Prediction API error');
   }
 
-  return response.json(); // { predicted_time_to_failure_days: number }
+  return response.json(); // { predicted_time_to_failure_days: number, machine_name: string, ... }
 }
