@@ -96,10 +96,7 @@ const Dashboard: React.FC = () => {
               </CardHeader>
               <CardContent>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {sortedEquipment.filter(eq => {
-                    const score = mockRiskScores.find(risk => risk.equipmentId === eq.id)?.score || 0;
-                    return score < 50;
-                  }).map(equipment => (
+                  {sortedEquipment.map(equipment => (
                     <EquipmentRiskCard
                       key={equipment.id}
                       equipment={equipment}
@@ -118,8 +115,8 @@ const Dashboard: React.FC = () => {
               </CardHeader>
               <CardContent>
                 <MaintenanceScheduleTable
-                  schedules={mockMaintenanceSchedule}
-                  equipment={mockEquipment}
+                  schedules={[...mockMaintenanceSchedule]}
+                  equipment={[...mockEquipment]}
                 />
               </CardContent>
             </Card>

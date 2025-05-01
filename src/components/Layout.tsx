@@ -45,7 +45,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                     src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
                     alt="User profile"
                   />
-                  <span className="ml-2 text-sm font-medium text-gray-700">Alex Johnson</span>
+                  <span className="ml-2 text-sm font-medium text-gray-700">Alex</span>
                 </div>
               </div>
             </div>

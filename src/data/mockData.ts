@@ -90,6 +90,54 @@ export const mockEquipment: readonly Equipment[] = [
     department: 'Logistics',
     costPerHour: 500,
   },
+  {
+    id: 'EQ007',
+    name: 'Injection Molding Machine 2',
+    type: 'Injection Molding',
+    manufacturer: 'Engel',
+    model: 'Victory 330/120',
+    installationDate: '2019-11-20',
+    expectedLifespan: 12,
+    location: 'Building 2, Floor 1',
+    department: 'Plastics',
+    costPerHour: 1600,
+  },
+  {
+    id: 'EQ008',
+    name: 'Laser Cutting System',
+    type: 'Cutting',
+    manufacturer: 'Trumpf',
+    model: 'TruLaser 5030',
+    installationDate: '2020-09-15',
+    expectedLifespan: 10,
+    location: 'Building 2, Floor 2',
+    department: 'Fabrication',
+    costPerHour: 1900,
+  },
+  {
+    id: 'EQ009',
+    name: 'Paint Booth 1',
+    type: 'Finishing',
+    manufacturer: 'Nordson',
+    model: 'ColorMax 3',
+    installationDate: '2018-04-05',
+    expectedLifespan: 15,
+    location: 'Building 4, Floor 1',
+    department: 'Finishing',
+    costPerHour: 950,
+  },
+  {
+    id: 'EQ010',
+    name: 'Welding Robot 2',
+    type: 'Welding',
+    manufacturer: 'ABB',
+    model: 'IRB 2600',
+    installationDate: '2021-02-12',
+    expectedLifespan: 10,
+    location: 'Building 3, Floor 2',
+    department: 'Welding',
+    costPerHour: 1300,
+  }
 ] as const;
 
 // Mock maintenance logs
@@ -188,6 +236,77 @@ export const mockMaintenanceLogs: readonly MaintenanceLog[] = [
     cost: 100,
     notes: 'Predicted wear based on usage patterns.',
   },
+  {
+    id: 'ML008',
+    equipmentId: 'EQ007',
+    date: '2023-10-12',
+    type: 'preventive',
+    action: 'Nozzle cleaning and inspection',
+    technician: 'James Wilson',
+    parts: [
+      { id: 'P007', name: 'Cleaning solution', quantity: 1, cost: 35 },
+      { id: 'P008', name: 'Nozzle tips', quantity: 2, cost: 120 }
+    ],
+    duration: 4,
+    cost: 355,
+    notes: 'Replaced worn nozzle tips as precautionary measure.',
+  },
+  {
+    id: 'ML009',
+    equipmentId: 'EQ008',
+    date: '2023-11-15',
+    type: 'preventive',
+    action: 'Lens cleaning and alignment',
+    technician: 'Lisa Chen',
+    parts: [
+      { id: 'P009', name: 'Optical cleaning kit', quantity: 1, cost: 75 }
+    ],
+    duration: 3,
+    cost: 375,
+    notes: 'Regular maintenance for laser system optics.',
+  },
+  {
+    id: 'ML010',
+    equipmentId: 'EQ009',
+    date: '2023-08-22',
+    type: 'corrective',
+    action: 'Replace air filtration unit',
+    technician: 'Robert Lee',
+    parts: [
+      { id: 'P010', name: 'HEPA filter unit', quantity: 1, cost: 450 },
+      { id: 'P011', name: 'Filter housing gasket', quantity: 1, cost: 25 }
+    ],
+    duration: 5,
+    cost: 675,
+    notes: 'Air quality issues prompted replacement ahead of schedule.',
+  },
+  {
+    id: 'ML011',
+    equipmentId: 'EQ010',
+    date: '2023-10-05',
+    type: 'preventive',
+    action: 'Full system calibration',
+    technician: 'Maria Garcia',
+    parts: [],
+    duration: 4,
+    cost: 500,
+    notes: 'Quarterly calibration to maintain weld precision.',
+  },
+  {
+    id: 'ML012',
+    equipmentId: 'EQ006',
+    date: '2023-09-18',
+    type: 'corrective',
+    action: 'Replace motor drive unit',
+    technician: 'John Smith',
+    parts: [
+      { id: 'P012', name: 'Drive motor assembly', quantity: 1, cost: 620 },
+      { id: 'P013', name: 'Belt set', quantity: 1, cost: 85 }
+    ],
+    duration: 7,
+    cost: 1005,
+    notes: 'Motor showed signs of bearing failure during operation.',
+  }
 ] as const;
 
 // Mock failure history
@@ -257,6 +376,71 @@ export const mockFailureHistory: readonly FailureHistory[] = [
     rootCause: 'Power surge damaged control board',
     resolution: 'Replaced control board and installed surge protector',
   },
+  {
+    id: 'F006',
+    equipmentId: 'EQ007',
+    startDate: '2023-09-28',
+    endDate: '2023-09-30',
+    duration: 36,
+    failureType: 'Mechanical',
+    failureCode: 'HYD-08',
+    impact: 'high',
+    costImpact: 57600,
+    rootCause: 'Hydraulic pump failure due to contamination',
+    resolution: 'Replaced pump assembly and implemented new filtration system',
+  },
+  {
+    id: 'F007',
+    equipmentId: 'EQ008',
+    startDate: '2023-07-05',
+    endDate: '2023-07-07',
+    duration: 24,
+    failureType: 'Optical',
+    failureCode: 'OPT-03',
+    impact: 'medium',
+    costImpact: 45600,
+    rootCause: 'Misaligned beam path due to vibration over time',
+    resolution: 'Complete recalibration and reinforcement of mounting system',
+  },
+  {
+    id: 'F008',
+    equipmentId: 'EQ006',
+    startDate: '2023-09-18',
+    endDate: '2023-09-19',
+    duration: 12,
+    failureType: 'Mechanical',
+    failureCode: 'MTR-02',
+    impact: 'medium',
+    costImpact: 6000,
+    rootCause: 'Motor bearing seizure due to overheating',
+    resolution: 'Motor replacement and improved cooling system installation',
+  },
+  {
+    id: 'F009',
+    equipmentId: 'EQ009',
+    startDate: '2023-08-22',
+    endDate: '2023-08-23',
+    duration: 10,
+    failureType: 'Environmental',
+    failureCode: 'ENV-05',
+    impact: 'low',
+    costImpact: 9500,
+    rootCause: 'Filtration system clogged with paint particles',
+    resolution: 'Replaced filtration unit and updated maintenance frequency',
+  },
+  {
+    id: 'F010',
+    equipmentId: 'EQ010',
+    startDate: '2023-06-02',
+    endDate: '2023-06-03',
+    duration: 14,
+    failureType: 'Electrical',
+    failureCode: 'EL-07',
+    impact: 'medium',
+    costImpact: 18200,
+    rootCause: 'Control board failure due to power fluctuation',
+    resolution: 'Replaced control board and installed power conditioning',
+  }
 ] as const;
 
 // Mock production data
@@ -327,6 +511,94 @@ export const mockProductionData: readonly ProductionData[] = [
     qualityIssues: 5,
     notes: 'Normal operation',
   },
+  {
+    id: 'PD007',
+    equipmentId: 'EQ007',
+    date: '2023-11-25',
+    shift: 'morning',
+    operator: 'David Chen',
+    hoursOperated: 8,
+    outputVolume: 750,
+    qualityIssues: 8,
+    notes: 'New mold setup, minor adjustments needed',
+  },
+  {
+    id: 'PD008',
+    equipmentId: 'EQ007',
+    date: '2023-11-25',
+    shift: 'afternoon',
+    operator: 'Sandra Kim',
+    hoursOperated: 8,
+    outputVolume: 780,
+    qualityIssues: 5,
+    notes: 'Improved performance after morning adjustments',
+  },
+  {
+    id: 'PD009',
+    equipmentId: 'EQ008',
+    date: '2023-11-25',
+    shift: 'morning',
+    operator: 'Thomas Jackson',
+    hoursOperated: 8,
+    outputVolume: 320,
+    qualityIssues: 1,
+    notes: 'High precision cutting job, excellent quality',
+  },
+  {
+    id: 'PD010',
+    equipmentId: 'EQ009',
+    date: '2023-11-25',
+    shift: 'afternoon',
+    operator: 'Lisa Rodriguez',
+    hoursOperated: 8,
+    outputVolume: 180,
+    qualityIssues: 3,
+    notes: 'Specialty finish, longer cycle time per unit',
+  },
+  {
+    id: 'PD011',
+    equipmentId: 'EQ010',
+    date: '2023-11-25',
+    shift: 'morning',
+    operator: 'Kevin Williams',
+    hoursOperated: 8,
+    outputVolume: 95,
+    qualityIssues: 2,
+    notes: 'Complex weld pattern, slightly ahead of schedule',
+  },
+  {
+    id: 'PD012',
+    equipmentId: 'EQ006',
+    date: '2023-11-25',
+    shift: 'night',
+    operator: 'Michelle Park',
+    hoursOperated: 8,
+    outputVolume: 4500,
+    qualityIssues: 0,
+    notes: 'Material transport only, no quality issues',
+  },
+  {
+    id: 'PD013',
+    equipmentId: 'EQ001',
+    date: '2023-11-26',
+    shift: 'morning',
+    operator: 'Robert Lee',
+    hoursOperated: 8,
+    outputVolume: 2420,
+    qualityIssues: 14,
+    notes: 'Slight vibration noticed in section 3',
+  },
+  {
+    id: 'PD014',
+    equipmentId: 'EQ002',
+    date: '2023-11-26',
+    shift: 'afternoon',
+    operator: 'James Wilson',
+    hoursOperated: 6.5,
+    outputVolume: 70,
+    qualityIssues: 4,
+    notes: 'Maintenance break for tool change',
+  }
 ] as const;
 
 // Mock risk scores
@@ -473,6 +745,90 @@ export const mockRiskScores: readonly EquipmentRiskScore[] = [
         timeframe: 'within 60 days'
       }
     ]
+  },
+  {
+    equipmentId: 'EQ007',
+    score: 42,
+    predictionDate: '2023-11-26',
+    timeFrame: 21,
+    contributingFactors: [
+      { factor: 'Nozzle wear', impact: 45, description: 'Injection nozzle showing signs of wear' },
+      { factor: 'Previous failure', impact: 30, description: 'Hydraulic system failure within past 2 months' },
+      { factor: 'Cycle time increase', impact: 35, description: '3% increase in cycle time over 2 weeks' }
+    ],
+    confidence: 78,
+    recommendedActions: [
+      {
+        action: 'Replace injection nozzle assembly',
+        priority: 'medium',
+        estimatedCost: 1200,
+        potentialSavings: 30000,
+        timeframe: 'within 14 days'
+      }
+    ]
+  },
+  {
+    equipmentId: 'EQ008',
+    score: 15,
+    predictionDate: '2023-11-26',
+    timeFrame: 60,
+    contributingFactors: [
+      { factor: 'Recent maintenance', impact: 10, description: 'Complete optics cleaning in past month' },
+      { factor: 'Performance metrics', impact: 15, description: 'Consistent cutting accuracy' },
+      { factor: 'Age', impact: 20, description: 'Relatively new equipment' }
+    ],
+    confidence: 88,
+    recommendedActions: [
+      {
+        action: 'Standard quarterly maintenance',
+        priority: 'low',
+        estimatedCost: 500,
+        potentialSavings: 2000,
+        timeframe: 'within 45 days'
+      }
+    ]
+  },
+  {
+    equipmentId: 'EQ009',
+    score: 55,
+    predictionDate: '2023-11-26',
+    timeFrame: 14,
+    contributingFactors: [
+      { factor: 'Filter efficiency', impact: 65, description: 'Air quality measurements showing decreased filtration' },
+      { factor: 'Previous failure pattern', impact: 40, description: 'Similar readings before previous filter failure' },
+      { factor: 'Production environment', impact: 35, description: 'Recent increase in particulate load' }
+    ],
+    confidence: 82,
+    recommendedActions: [
+      {
+        action: 'Replace all filtration stages',
+        priority: 'high',
+        estimatedCost: 1800,
+        potentialSavings: 15000,
+        timeframe: 'within 7 days'
+      }
+    ]
+  },
+  {
+    equipmentId: 'EQ010',
+    score: 28,
+    predictionDate: '2023-11-26',
+    timeFrame: 30,
+    contributingFactors: [
+      { factor: 'Weld quality metrics', impact: 25, description: 'Slight decrease in weld quality consistency' },
+      { factor: 'Power consumption', impact: 20, description: 'Power draw increased 3% over 2 weeks' },
+      { factor: 'Maintenance history', impact: 30, description: 'Due for regular calibration' }
+    ],
+    confidence: 75,
+    recommendedActions: [
+      {
+        action: 'Full calibration and diagnostics check',
+        priority: 'medium',
+        estimatedCost: 750,
+        potentialSavings: 8000,
+        timeframe: 'within 21 days'
+      }
+    ]
   }
 ] as const;
 
@@ -537,6 +893,90 @@ export const mockMaintenanceSchedule: readonly MaintenanceSchedule[] = [
     estimatedCost: 100,
     potentialSavings: 800,
     status: 'scheduled'
+  },
+  {
+    id: 'MS006',
+    equipmentId: 'EQ007',
+    plannedDate: '2023-12-02',
+    estimatedDuration: 6,
+    type: 'predictive',
+    priority: 'medium',
+    technician: 'James Wilson',
+    estimatedCost: 1200,
+    potentialSavings: 30000,
+    status: 'scheduled'
+  },
+  {
+    id: 'MS007',
+    equipmentId: 'EQ009',
+    plannedDate: '2023-11-29',
+    estimatedDuration: 4,
+    type: 'predictive',
+    priority: 'high',
+    technician: 'Robert Lee',
+    estimatedCost: 1800,
+    potentialSavings: 15000,
+    status: 'scheduled'
+  },
+  {
+    id: 'MS008',
+    equipmentId: 'EQ010',
+    plannedDate: '2023-12-12',
+    estimatedDuration: 3,
+    type: 'preventive',
+    priority: 'medium',
+    technician: 'Maria Garcia',
+    estimatedCost: 750,
+    potentialSavings: 8000,
+    status: 'scheduled'
+  },
+  {
+    id: 'MS009',
+    equipmentId: 'EQ006',
+    plannedDate: '2024-01-15',
+    estimatedDuration: 2,
+    type: 'preventive',
+    priority: 'low',
+    technician: 'John Smith',
+    estimatedCost: 250,
+    potentialSavings: 1000,
+    status: 'scheduled'
+  },
+  {
+    id: 'MS010',
+    equipmentId: 'EQ008',
+    plannedDate: '2024-01-10',
+    estimatedDuration: 3,
+    type: 'preventive',
+    priority: 'low',
+    technician: 'Lisa Chen',
+    estimatedCost: 500,
+    potentialSavings: 2000,
+    status: 'scheduled'
+  },
+  {
+    id: 'MS011',
+    equipmentId: 'EQ001',
+    plannedDate: '2023-12-28',
+    estimatedDuration: 8,
+    type: 'predictive',
+    priority: 'high',
+    technician: 'Alex Johnson',
+    estimatedCost: 1500,
+    potentialSavings: 75000,
+    status: 'pending-approval'
+  },
+  {
+    id: 'MS012',
+    equipmentId: 'EQ007',
+    plannedDate: '2024-01-05',
+    estimatedDuration: 10,
+    type: 'overhaul',
+    priority: 'medium',
+    technician: 'James Wilson',
+    estimatedCost: 5800,
+    potentialSavings: 45000,
+    status: 'pending-approval'
   }
 ] as const;
 
