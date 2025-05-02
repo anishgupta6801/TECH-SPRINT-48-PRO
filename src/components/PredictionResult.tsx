@@ -13,10 +13,10 @@ const PredictionResult: React.FC<PredictionResultProps> = ({
 }) => {
   // Determine severity level based on predicted days
   const getSeverityLevel = (days: number) => {
-    if (days <= 7) return { level: 'critical', color: 'red' };
-    if (days <= 14) return { level: 'high', color: 'orange' };
-    if (days <= 30) return { level: 'moderate', color: 'yellow' };
-    return { level: 'low', color: 'green' };
+    if (days <= 7) return { level: 'critical', color: 'red', textColor: 'text-red-600', bgColor: 'bg-red-100', textDarkColor: 'text-red-800', fillColor: 'bg-red-500' };
+    if (days <= 14) return { level: 'high', color: 'orange', textColor: 'text-orange-600', bgColor: 'bg-orange-100', textDarkColor: 'text-orange-800', fillColor: 'bg-orange-500' };
+    if (days <= 30) return { level: 'moderate', color: 'yellow', textColor: 'text-yellow-600', bgColor: 'bg-yellow-100', textDarkColor: 'text-yellow-800', fillColor: 'bg-yellow-500' };
+    return { level: 'low', color: 'green', textColor: 'text-green-600', bgColor: 'bg-green-100', textDarkColor: 'text-green-800', fillColor: 'bg-green-500' };
   };
 
   const severity = getSeverityLevel(predictedDays);
@@ -26,21 +26,22 @@ const PredictionResult: React.FC<PredictionResultProps> = ({
       <h2 className="text-lg font-medium mb-2">Prediction Result for {machineName}</h2>
       
       <div className="flex flex-col items-center py-4">
-        <div className={`text-4xl font-bold text-${severity.color}-600 mb-2`}>
+        <div className={`text-4xl font-bold ${severity.textColor} mb-2`}>
           {Math.round(predictedDays)} days
         </div>
         <div className="text-sm text-gray-500">Estimated time until failure</div>
         
-        <div className={`mt-4 px-4 py-1 rounded-full bg-${severity.color}-100 text-${severity.color}-800 text-sm font-medium`}>
+        <div className={`mt-4 px-4 py-1 rounded-full ${severity.bgColor} ${severity.textDarkColor} text-sm font-medium`}>
           {severity.level.charAt(0).toUpperCase() + severity.level.slice(1)} risk level
         </div>
         
         <div className="mt-6 w-full">
           <div className="h-2 w-full bg-gray-200 rounded-full overflow-hidden">
             <div 
-              className={`h-full bg-${severity.color}-500`} 
+              className={severity.fillColor}
               style={{ 
-                width: `${Math.min(100, Math.max(0, 100 - (predictedDays / 90) * 100))}%` 
+                width: `${Math.min(100, Math.max(0, 100 - (predictedDays / 90) * 100))}%`,
+                height: '100%'
               }}
             ></div>
           </div>

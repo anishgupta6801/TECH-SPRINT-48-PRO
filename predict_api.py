@@ -6,7 +6,19 @@ import hashlib
 import time
 
 app = Flask(__name__)
-CORS(app)  # Enable CORS for all routes
+# Enable CORS for all routes with more comprehensive configuration
+CORS(app, resources={r"/*": {
+    "origins": [
+        "http://localhost:5173", 
+        "http://127.0.0.1:5173",
+        "http://localhost:5174", 
+        "http://127.0.0.1:5174",
+        "http://localhost:5175", 
+        "http://127.0.0.1:5175"
+    ], 
+    "methods": ["GET", "POST", "OPTIONS"], 
+    "allow_headers": ["Content-Type", "Cache-Control", "Pragma", "Expires"]
+}})
 
 # Dictionary to store machine-specific coefficients
 machine_coefficients = {}
@@ -44,8 +56,12 @@ def get_machine_coefficients(machine_name):
     
     return coefficients
 
-@app.route('/predict', methods=['POST'])
+@app.route('/predict', methods=['POST', 'OPTIONS'])
 def predict():
+    # Handle preflight OPTIONS request
+    if request.method == 'OPTIONS':
+        return '', 200
+    
     data = request.json
     
     # Extract machine name
@@ -103,10 +119,12 @@ def predict():
     print(f"Machine-specific coefficients: {coef}")
     print(f"Predicted time to failure: {predicted_days} days")
     
-    return jsonify({
+    response = jsonify({
         'predicted_time_to_failure_days': predicted_days,
         'machine_name': machine_name
     })
+    
+    return response
 
 if __name__ == '__main__':
     print("Starting mock prediction API server...")

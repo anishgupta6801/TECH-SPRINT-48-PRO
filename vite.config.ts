@@ -7,4 +7,11 @@ export default defineConfig({
   optimizeDeps: {
     exclude: ['lucide-react'],
   },
+  server: {
+    host: 'localhost',
+    port: 5173,
+    open: true, // Automatically open the browser
+    historyApiFallback: true // Ensure SPA routes work correctly
+  },
+  base: './' // Set to relative path for proper asset loading
 });

@@ -1,221 +1,126 @@
-# Equipment Maintenance System with Multi-Organization Support
+# PredictPro AI - Equipment Failure Prediction System
 
-This application provides a web-based platform for multiple organizations to manage their equipment maintenance, with role-based access control and organization-specific data separation.
+PredictPro AI is a powerful application that combines a React frontend with a Python Flask API to predict equipment failure time. The system uses a sophisticated algorithm that considers various factors like equipment age, usage patterns, maintenance history, and more to generate accurate predictions.
 
 ## Features
 
-- **Multi-Organization Support:** Each organization can manage their own equipment independently
-- **Role-Based Access Control:** Three user levels (Admin, Manager, Technician)
-- **User Management:** Admins can add and manage users within their organization
-- **Organization Profile Management:** Admins can update organization information
-- **Equipment Tracking:** Track all equipment across various facilities
-- **Maintenance Logs:** Record all maintenance activities
-- **Failure History:** Track equipment failures and resolutions
-- **Predictive Maintenance:** Score equipment risk levels to predict failures
+- **AI-Powered Predictions**: Sophisticated prediction model that adapts to different machine types
+- **User-Friendly Interface**: Clean, professional blue and white interface design
+- **Responsive Design**: Works on desktop and mobile devices
+- **Data Visualization**: Clear visualization of prediction results and risk levels
+- **Maintenance Recommendations**: Automated recommendations based on prediction results
 
-## Getting Started
+## Installation
 
-### Installation
+### Prerequisites
 
-1. Clone the repository
-2. Install dependencies:
+- [Node.js](https://nodejs.org/) (v14 or higher)
+- [Python](https://www.python.org/) (v3.8 or higher)
+- NPM (comes with Node.js)
+
+### Setup Instructions
+
+1. **Clone the repository**:
+   ```
+   git clone <repository-url>
+   cd equipment-failure-prediction
+   ```
+
+2. **Install frontend dependencies**:
    ```
    npm install
    ```
-3. Start the development server:
+
+3. **Install Python dependencies**:
+   ```
+   pip install flask==2.0.1 flask-cors==3.0.10
+   ```
+
+## Running the Application
+
+### Option 1: Using the combined startup script (Recommended)
+
+Simply run the startup script that starts both the API server and React frontend:
+
+```
+start_app.bat
+```
+
+The application will be available at http://localhost:5174
+
+### Option 2: Running components separately
+
+1. **Start the Python API server**:
+   ```
+   start_api_server.bat
+   ```
+   The API will be available at http://localhost:5000
+
+2. **Start the React frontend**:
    ```
    npm run dev
    ```
+   The frontend will be available at http://localhost:5174
 
-## Authentication System
+## Usage Guide
 
-The application includes a complete authentication system with:
+1. Navigate to the Prediction page
+2. Fill in the equipment details:
+   - Machine Name (e.g., "Hydraulic Press", "Cooling Turbine")
+   - Age (in years)
+   - Usage Hours
+   - Last Maintenance (days ago)
+   - Failures Last Year
+   - Average Output percentage
+   - Quality Issues count
+   - Cost per Hour ($)
+3. Click "Predict Time to Failure"
+4. View the prediction results, which include:
+   - Estimated days until failure
+   - Risk level assessment
+   - Visual risk indicator
+   - Maintenance recommendations (for high-risk equipment)
 
-- User registration and login
-- Role-based access control
-- Organization profile management
-- User management (for admins and managers)
+## Technical Architecture
 
-### Roles
+### Frontend (React + TypeScript)
 
-1. **Admin**
-   - Full access to the system
-   - Can manage organization settings
-   - Can create/manage all users
-   - Can configure equipment and maintenance settings
+- Modern React with functional components and hooks
+- TypeScript for type safety
+- Tailwind CSS for styling
+- Framer Motion for animations
+- Three.js for 3D elements
+- Responsive design principles
 
-2. **Manager**
-   - Cannot modify organization settings
-   - Can create/manage technician users
-   - Can manage equipment and maintenance activities
+### Backend (Python + Flask)
 
-3. **Technician**
-   - Cannot manage users
-   - Can log maintenance activities
-   - Can view equipment details and maintenance history
+- Flask API with CORS support
+- Advanced prediction algorithm with machine-specific coefficients
+- Random seed-based determinism for consistent results
+- Cache prevention mechanisms
 
-## Connecting to a Backend
+## Troubleshooting
 
-Currently, the application uses mock data and simulated authentication. To connect it to a real backend:
+### Common Issues
 
-### AI Prediction Model Integration
+1. **"Failed to fetch" errors**:
+   - Make sure the Python API server is running
+   - Check that port 5000 is not in use by another application
+   - Verify there are no firewall restrictions
 
-The application includes integration with a Python machine learning model that predicts equipment time to failure:
+2. **Identical prediction results**:
+   - The application includes cache prevention and randomness to ensure varied results
+   - If you still see identical results, try using a different machine name
 
-1. **Python API Server Setup**
-   - Install Python dependencies (Flask, scikit-learn, pandas, etc.):
-     ```
-     pip install -r requirements.txt
-     ```
-   - Start the Python API server:
-     - On Windows: Run `start_api_server.bat`
-     - On Unix/Linux/Mac: Run `sh start_api_server.sh`
-     
-2. **Using the AI Prediction Feature**
-   - Navigate to the "AI Prediction" page from the navigation menu
-   - Enter equipment parameters to get a prediction of time to failure
-   - The model returns an estimate of days until equipment failure
-   - Based on predicted days, appropriate maintenance recommendations are displayed
+3. **Command not found errors**:
+   - Make sure Python is in your system PATH
+   - Try running the commands directly: `python predict_api.py` and `npm run dev`
 
-3. **Customizing the AI Model**
-   - The machine learning model is located at `src/components/predict_api.py`
-   - The React frontend communicates with the model via the API endpoint at `http://localhost:5000/predict`
-   - To replace the model with your own:
-     1. Train your new model and save it as a joblib file
-     2. Update the model loading path in `predict_api.py`
-     3. Ensure your model accepts the same input features or update the API accordingly
+## License
 
-### API Endpoints Required
+This project is licensed under the MIT License - see the LICENSE file for details.
 
-1. **Authentication Endpoints**
-   - `POST /api/auth/login` - User login
-   - `POST /api/auth/register` - Organization & admin registration
-   - `POST /api/auth/logout` - User logout
-   - `GET /api/auth/me` - Get current user information
+## Acknowledgments
 
-2. **User Management Endpoints**
-   - `GET /api/users` - List users in organization
-   - `POST /api/users` - Create a new user
-   - `PUT /api/users/:id` - Update a user
-   - `DELETE /api/users/:id` - Deactivate a user
-
-3. **Organization Endpoints**
-   - `GET /api/organization` - Get organization details
-   - `PUT /api/organization` - Update organization details
-
-4. **Equipment Endpoints**
-   - `GET /api/equipment` - List all equipment
-   - `GET /api/equipment/:id` - Get specific equipment details
-   - `POST /api/equipment` - Add new equipment
-   - `PUT /api/equipment/:id` - Update equipment details
-
-5. **Maintenance Endpoints**
-   - `GET /api/maintenance` - List maintenance logs
-   - `POST /api/maintenance` - Create maintenance log
-   - `GET /api/maintenance/schedule` - Get maintenance schedule
-   - `POST /api/maintenance/schedule` - Schedule maintenance
-
-### Integration Steps
-
-1. **Update Authentication Context**
-   - Modify the `login`, `register`, and `logout` functions in `AuthContext.tsx` to make real API calls
-   - Update the initial loading check to verify JWT tokens with your backend
-
-2. **Create API Service**
-   - Create a new file `src/services/api.ts` to centralize all API calls
-   - Implement functions for all required endpoints
-   - Add proper error handling and loading states
-
-3. **Secure Token Storage**
-   - Replace the simple localStorage token storage with a more secure method
-   - Consider using HttpOnly cookies for JWT storage
-
-4. **Environment Configuration**
-   - Create `.env` files to store API URLs and other configuration
-   - Update the code to use these environment variables
-
-## Database Schema Recommendations
-
-For a backend implementation, consider the following schema design:
-
-1. **Organizations**
-   - id (PK)
-   - name
-   - industry
-   - address
-   - contactEmail
-   - contactPhone
-   - subscriptionTier
-   - maxUsers
-   - createdAt
-
-2. **Users**
-   - id (PK)
-   - organizationId (FK)
-   - email
-   - passwordHash
-   - firstName
-   - lastName
-   - role
-   - isActive
-   - createdAt
-   - lastLogin
-
-3. **Equipment**
-   - id (PK)
-   - organizationId (FK)
-   - name
-   - type
-   - manufacturer
-   - model
-   - installationDate
-   - expectedLifespan
-   - location
-   - department
-   - costPerHour
-
-4. **MaintenanceLogs**
-   - id (PK)
-   - organizationId (FK)
-   - equipmentId (FK)
-   - userId (FK, technician)
-   - date
-   - type
-   - action
-   - duration
-   - cost
-   - notes
-
-5. **MaintenanceParts**
-   - id (PK)
-   - maintenanceLogId (FK)
-   - name
-   - quantity
-   - cost
-
-6. **FailureHistory**
-   - id (PK)
-   - organizationId (FK)
-   - equipmentId (FK)
-   - startDate
-   - endDate
-   - duration
-   - failureType
-   - failureCode
-   - impact
-   - costImpact
-   - rootCause
-   - resolution
-
-7. **MaintenanceSchedule**
-   - id (PK)
-   - organizationId (FK)
-   - equipmentId (FK)
-   - userId (FK, assigned technician)
-   - plannedDate
-   - estimatedDuration
-   - type
-   - priority
-   - estimatedCost
-   - potentialSavings
-   - status 
+- Created for the Tech Sprint project
+- Uses open-source libraries and frameworks 

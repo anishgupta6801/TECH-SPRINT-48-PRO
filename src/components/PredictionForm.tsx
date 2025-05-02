@@ -83,7 +83,7 @@ const PredictionForm: React.FC<PredictionFormProps> = ({
               onChange={handleChange}
               required
               placeholder="Enter machine name"
-              className="w-full p-2 border border-gray-300 rounded-md"
+              className="w-full p-2 border border-gray-300 rounded-md focus:ring-1 focus:ring-blue-500 focus:border-blue-500 outline-none"
             />
           </div>
           
@@ -99,7 +99,7 @@ const PredictionForm: React.FC<PredictionFormProps> = ({
               min="0"
               step="0.1"
               required
-              className="w-full p-2 border border-gray-300 rounded-md"
+              className="w-full p-2 border border-gray-300 rounded-md focus:ring-1 focus:ring-blue-500 focus:border-blue-500 outline-none"
             />
           </div>
           
@@ -114,7 +114,7 @@ const PredictionForm: React.FC<PredictionFormProps> = ({
               onChange={handleChange}
               min="0"
               required
-              className="w-full p-2 border border-gray-300 rounded-md"
+              className="w-full p-2 border border-gray-300 rounded-md focus:ring-1 focus:ring-blue-500 focus:border-blue-500 outline-none"
             />
           </div>
           
@@ -129,7 +129,7 @@ const PredictionForm: React.FC<PredictionFormProps> = ({
               onChange={handleChange}
               min="0"
               required
-              className="w-full p-2 border border-gray-300 rounded-md"
+              className="w-full p-2 border border-gray-300 rounded-md focus:ring-1 focus:ring-blue-500 focus:border-blue-500 outline-none"
             />
           </div>
           
@@ -144,7 +144,7 @@ const PredictionForm: React.FC<PredictionFormProps> = ({
               onChange={handleChange}
               min="0"
               required
-              className="w-full p-2 border border-gray-300 rounded-md"
+              className="w-full p-2 border border-gray-300 rounded-md focus:ring-1 focus:ring-blue-500 focus:border-blue-500 outline-none"
             />
           </div>
           
@@ -160,7 +160,7 @@ const PredictionForm: React.FC<PredictionFormProps> = ({
               min="0"
               max="100"
               required
-              className="w-full p-2 border border-gray-300 rounded-md"
+              className="w-full p-2 border border-gray-300 rounded-md focus:ring-1 focus:ring-blue-500 focus:border-blue-500 outline-none"
             />
           </div>
           
@@ -175,7 +175,7 @@ const PredictionForm: React.FC<PredictionFormProps> = ({
               onChange={handleChange}
               min="0"
               required
-              className="w-full p-2 border border-gray-300 rounded-md"
+              className="w-full p-2 border border-gray-300 rounded-md focus:ring-1 focus:ring-blue-500 focus:border-blue-500 outline-none"
             />
           </div>
           
@@ -190,7 +190,7 @@ const PredictionForm: React.FC<PredictionFormProps> = ({
               onChange={handleChange}
               min="0"
               required
-              className="w-full p-2 border border-gray-300 rounded-md"
+              className="w-full p-2 border border-gray-300 rounded-md focus:ring-1 focus:ring-blue-500 focus:border-blue-500 outline-none"
             />
           </div>
         </div>
