@@ -12,6 +12,19 @@ export interface Equipment {
   location: string;
   department: string;
   costPerHour: number; // downtime cost per hour
+  // Arduino connectivity fields
+  hasArduinoConnectivity: boolean;
+  arduinoIP?: string;
+  arduinoPort?: number;
+  arduinoStatus?: 'connected' | 'disconnected' | 'error';
+  lastDataUpdate?: string;
+  sensorData?: {
+    temperature?: number;
+    vibration?: number;
+    powerConsumption?: number;
+    pressure?: number;
+    humidity?: number;
+  };
 }
 
 // Maintenance log entry
@@ -126,3 +139,13 @@ export interface PredictionSettings {
     inventory: number; // multiplier for parts
   };
 }
+
+const handleArduinoConnect = async (ip: string, port: number) => {
+  // Implement Arduino connection logic here
+  console.log(`Connecting to Arduino at ${ip}:${port}`);
+};
+
+const handleArduinoDisconnect = async () => {
+  // Implement Arduino disconnection logic here
+  console.log('Disconnecting Arduino');
+};

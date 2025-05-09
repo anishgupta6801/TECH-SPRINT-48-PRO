@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import ClassicLayout from '../components/ClassicLayout';
+import ArduinoConnection from '../components/ArduinoConnection';
 
 // Mock data for MNC equipment
 const equipmentData = [
@@ -186,6 +187,16 @@ const Dashboard: React.FC = () => {
   
   const toggleDetails = (id: string) => {
     setSelectedEquipment(selectedEquipment === id ? null : id);
+  };
+
+  const handleArduinoConnect = async (ip: string, port: number) => {
+    // Implement Arduino connection logic here
+    console.log(`Connecting to Arduino at ${ip}:${port}`);
+  };
+
+  const handleArduinoDisconnect = async () => {
+    // Implement Arduino disconnection logic here
+    console.log('Disconnecting Arduino');
   };
 
   return (
@@ -391,6 +402,80 @@ const Dashboard: React.FC = () => {
           </div>
         </div>
       </div>
+      
+      {selectedEquipment && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-lg p-6 max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-xl font-medium text-gray-900">
+                {equipmentData.find(e => e.id === selectedEquipment)?.name}
+              </h2>
+              <button
+                onClick={() => setSelectedEquipment(null)}
+                className="text-gray-500 hover:text-gray-700"
+                title="Close details"
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="space-y-4">
+                <div>
+                  <p className="text-sm font-medium text-gray-500">Type</p>
+                  <p className="text-sm text-gray-900">{equipmentData.find(e => e.id === selectedEquipment)?.type}</p>
+                </div>
+                <div>
+                  <p className="text-sm font-medium text-gray-500">Model</p>
+                  <p className="text-sm text-gray-900">{equipmentData.find(e => e.id === selectedEquipment)?.model}</p>
+                </div>
+                <div>
+                  <p className="text-sm font-medium text-gray-500">Installation Date</p>
+                  <p className="text-sm text-gray-900">{equipmentData.find(e => e.id === selectedEquipment)?.installDate}</p>
+                </div>
+                <div>
+                  <p className="text-sm font-medium text-gray-500">Last Maintenance</p>
+                  <p className="text-sm text-gray-900">{equipmentData.find(e => e.id === selectedEquipment)?.lastMaintenance}</p>
+                </div>
+                <div>
+                  <p className="text-sm font-medium text-gray-500">Next Maintenance</p>
+                  <p className="text-sm text-gray-900">{equipmentData.find(e => e.id === selectedEquipment)?.nextMaintenance}</p>
+                </div>
+                <div>
+                  <p className="text-sm font-medium text-gray-500">Location</p>
+                  <p className="text-sm text-gray-900">{equipmentData.find(e => e.id === selectedEquipment)?.location}</p>
+                </div>
+                <div>
+                  <p className="text-sm font-medium text-gray-500">Operating Hours</p>
+                  <p className="text-sm text-gray-900">{equipmentData.find(e => e.id === selectedEquipment)?.operatingHours} hrs</p>
+                </div>
+                <div>
+                  <p className="text-sm font-medium text-gray-500">Efficiency</p>
+                  <p className="text-sm text-gray-900">{equipmentData.find(e => e.id === selectedEquipment)?.efficiency}%</p>
+                </div>
+                <div className="md:col-span-2 lg:col-span-3">
+                  <p className="text-sm font-medium text-gray-500">Functions</p>
+                  <p className="text-sm text-gray-900">{equipmentData.find(e => e.id === selectedEquipment)?.functions}</p>
+                </div>
+                <div className="md:col-span-2 lg:col-span-3">
+                  <p className="text-sm font-medium text-gray-500">Notes</p>
+                  <p className="text-sm text-gray-900">{equipmentData.find(e => e.id === selectedEquipment)?.notes}</p>
+                </div>
+              </div>
+              
+              <div>
+                <ArduinoConnection
+                  equipment={equipmentData.find(e => e.id === selectedEquipment)!}
+                  onConnect={handleArduinoConnect}
+                  onDisconnect={handleArduinoDisconnect}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </ClassicLayout>
   );
 };

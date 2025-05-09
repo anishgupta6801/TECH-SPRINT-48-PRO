@@ -1,0 +1,3 @@
+@echo off
+echo Starting Production Prediction API Server...
+python production_server.py 

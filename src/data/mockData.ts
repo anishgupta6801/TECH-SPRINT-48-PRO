@@ -29,6 +29,18 @@ export const mockEquipment: readonly Equipment[] = [
     location: 'Jamshedpur Plant, Section 1',
     department: 'Ironmaking',
     costPerHour: 3500,
+    hasArduinoConnectivity: true,
+    arduinoIP: '192.168.1.101',
+    arduinoPort: 80,
+    arduinoStatus: 'disconnected',
+    lastDataUpdate: '',
+    sensorData: {
+      temperature: 0,
+      vibration: 0,
+      powerConsumption: 0,
+      pressure: 0,
+      humidity: 0
+    }
   },
   {
     id: 'EQ002',
@@ -41,6 +53,18 @@ export const mockEquipment: readonly Equipment[] = [
     location: 'Coating Division, Line 3',
     department: 'Surface Engineering',
     costPerHour: 1800,
+    hasArduinoConnectivity: true,
+    arduinoIP: '192.168.1.102',
+    arduinoPort: 80,
+    arduinoStatus: 'disconnected',
+    lastDataUpdate: '',
+    sensorData: {
+      temperature: 0,
+      vibration: 0,
+      powerConsumption: 0,
+      pressure: 0,
+      humidity: 0
+    }
   },
   {
     id: 'EQ003',
@@ -53,6 +77,18 @@ export const mockEquipment: readonly Equipment[] = [
     location: 'Power House B',
     department: 'Utilities',
     costPerHour: 1200,
+    hasArduinoConnectivity: true,
+    arduinoIP: '192.168.1.103',
+    arduinoPort: 80,
+    arduinoStatus: 'disconnected',
+    lastDataUpdate: '',
+    sensorData: {
+      temperature: 0,
+      vibration: 0,
+      powerConsumption: 0,
+      pressure: 0,
+      humidity: 0
+    }
   },
   {
     id: 'EQ004',
@@ -65,6 +101,18 @@ export const mockEquipment: readonly Equipment[] = [
     location: 'Fabrication Department',
     department: 'Steel Cutting',
     costPerHour: 2200,
+    hasArduinoConnectivity: true,
+    arduinoIP: '192.168.1.104',
+    arduinoPort: 80,
+    arduinoStatus: 'disconnected',
+    lastDataUpdate: '',
+    sensorData: {
+      temperature: 0,
+      vibration: 0,
+      powerConsumption: 0,
+      pressure: 0,
+      humidity: 0
+    }
   },
   {
     id: 'EQ005',
@@ -77,6 +125,18 @@ export const mockEquipment: readonly Equipment[] = [
     location: 'Smelting Plant, Central System',
     department: 'Environmental Compliance',
     costPerHour: 2400,
+    hasArduinoConnectivity: true,
+    arduinoIP: '192.168.1.105',
+    arduinoPort: 80,
+    arduinoStatus: 'disconnected',
+    lastDataUpdate: '',
+    sensorData: {
+      temperature: 0,
+      vibration: 0,
+      powerConsumption: 0,
+      pressure: 0,
+      humidity: 0
+    }
   },
   {
     id: 'EQ006',
@@ -89,6 +149,18 @@ export const mockEquipment: readonly Equipment[] = [
     location: 'Fabrication Unit 2',
     department: 'Welding',
     costPerHour: 1500,
+    hasArduinoConnectivity: true,
+    arduinoIP: '192.168.1.106',
+    arduinoPort: 80,
+    arduinoStatus: 'disconnected',
+    lastDataUpdate: '',
+    sensorData: {
+      temperature: 0,
+      vibration: 0,
+      powerConsumption: 0,
+      pressure: 0,
+      humidity: 0
+    }
   },
   {
     id: 'EQ007',
@@ -101,6 +173,18 @@ export const mockEquipment: readonly Equipment[] = [
     location: 'Central Control Room',
     department: 'Process Automation',
     costPerHour: 2800,
+    hasArduinoConnectivity: true,
+    arduinoIP: '192.168.1.107',
+    arduinoPort: 80,
+    arduinoStatus: 'disconnected',
+    lastDataUpdate: '',
+    sensorData: {
+      temperature: 0,
+      vibration: 0,
+      powerConsumption: 0,
+      pressure: 0,
+      humidity: 0
+    }
   },
   {
     id: 'EQ008',
@@ -113,6 +197,18 @@ export const mockEquipment: readonly Equipment[] = [
     location: 'Finishing Department, Line 2',
     department: 'Product Packaging',
     costPerHour: 1900,
+    hasArduinoConnectivity: true,
+    arduinoIP: '192.168.1.108',
+    arduinoPort: 80,
+    arduinoStatus: 'disconnected',
+    lastDataUpdate: '',
+    sensorData: {
+      temperature: 0,
+      vibration: 0,
+      powerConsumption: 0,
+      pressure: 0,
+      humidity: 0
+    }
   },
   {
     id: 'EQ009',
@@ -125,6 +221,18 @@ export const mockEquipment: readonly Equipment[] = [
     location: 'Rolling Mill Complex, Section 4',
     department: 'Hot Rolling',
     costPerHour: 4500,
+    hasArduinoConnectivity: true,
+    arduinoIP: '192.168.1.109',
+    arduinoPort: 80,
+    arduinoStatus: 'disconnected',
+    lastDataUpdate: '',
+    sensorData: {
+      temperature: 0,
+      vibration: 0,
+      powerConsumption: 0,
+      pressure: 0,
+      humidity: 0
+    }
   },
   {
     id: 'EQ010',
@@ -137,6 +245,18 @@ export const mockEquipment: readonly Equipment[] = [
     location: 'Utility Division, Water Plant',
     department: 'Water Management',
     costPerHour: 1100,
+    hasArduinoConnectivity: true,
+    arduinoIP: '192.168.1.110',
+    arduinoPort: 80,
+    arduinoStatus: 'disconnected',
+    lastDataUpdate: '',
+    sensorData: {
+      temperature: 0,
+      vibration: 0,
+      powerConsumption: 0,
+      pressure: 0,
+      humidity: 0
+    }
   }
 ] as const;
 
