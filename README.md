@@ -1,126 +1,92 @@
-# PredictPro AI - Equipment Failure Prediction System
+# PredictPro AI Application
 
-PredictPro AI is a powerful application that combines a React frontend with a Python Flask API to predict equipment failure time. The system uses a sophisticated algorithm that considers various factors like equipment age, usage patterns, maintenance history, and more to generate accurate predictions.
+This is a full-stack application that combines a Python backend for AI predictions with a React frontend for user interaction.
 
-## Features
+## Prerequisites
 
-- **AI-Powered Predictions**: Sophisticated prediction model that adapts to different machine types
-- **User-Friendly Interface**: Clean, professional blue and white interface design
-- **Responsive Design**: Works on desktop and mobile devices
-- **Data Visualization**: Clear visualization of prediction results and risk levels
-- **Maintenance Recommendations**: Automated recommendations based on prediction results
+Before running the application, make sure you have the following installed:
 
-## Installation
+1. Python (3.8 or higher)
+2. Node.js and npm
+3. Git (for cloning the repository)
 
-### Prerequisites
+## Installation Steps
 
-- [Node.js](https://nodejs.org/) (v14 or higher)
-- [Python](https://www.python.org/) (v3.8 or higher)
-- NPM (comes with Node.js)
-
-### Setup Instructions
-
-1. **Clone the repository**:
-   ```
-   git clone <repository-url>
-   cd equipment-failure-prediction
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/anishgupta6801/TECH-SPRINT-48-PRO.git
+   cd TECH-SPRINT-48-PRO
    ```
 
-2. **Install frontend dependencies**:
+2. Set up the Python environment:
+   ```bash
+   # Create a virtual environment
+   python -m venv venv
+
+   # Activate the virtual environment
+   # On Windows:
+   venv\Scripts\activate
+   # On macOS/Linux:
+   source venv/bin/activate
+
+   # Install Python dependencies
+   pip install -r requirements.txt
    ```
+
+3. Set up the React frontend:
+   ```bash
+   # Install Node.js dependencies
    npm install
-   ```
-
-3. **Install Python dependencies**:
-   ```
-   pip install flask==2.0.1 flask-cors==3.0.10
    ```
 
 ## Running the Application
 
-### Option 1: Using the combined startup script (Recommended)
+### Method 1: Using the Batch File (Windows)
 
-Simply run the startup script that starts both the API server and React frontend:
+The easiest way to run the application is using the provided batch file:
 
-```
-start_app.bat
-```
+1. Simply double-click `start_app.bat`
+   - This will start both the Python backend and React frontend
+   - The application will be available at http://localhost:5173
 
-The application will be available at http://localhost:5174
+2. To stop the application:
+   - Press any key in the command prompt window
+   - This will automatically shut down both services
 
-### Option 2: Running components separately
+### Method 2: Manual Start
 
-1. **Start the Python API server**:
+If you prefer to run the services manually:
+
+1. Start the Python backend:
+   ```bash
+   # Make sure your virtual environment is activated
+   python predict_api.py
    ```
-   start_api_server.bat
-   ```
-   The API will be available at http://localhost:5000
 
-2. **Start the React frontend**:
-   ```
+2. In a new terminal, start the React frontend:
+   ```bash
    npm run dev
    ```
-   The frontend will be available at http://localhost:5174
 
-## Usage Guide
-
-1. Navigate to the Prediction page
-2. Fill in the equipment details:
-   - Machine Name (e.g., "Hydraulic Press", "Cooling Turbine")
-   - Age (in years)
-   - Usage Hours
-   - Last Maintenance (days ago)
-   - Failures Last Year
-   - Average Output percentage
-   - Quality Issues count
-   - Cost per Hour ($)
-3. Click "Predict Time to Failure"
-4. View the prediction results, which include:
-   - Estimated days until failure
-   - Risk level assessment
-   - Visual risk indicator
-   - Maintenance recommendations (for high-risk equipment)
-
-## Technical Architecture
-
-### Frontend (React + TypeScript)
-
-- Modern React with functional components and hooks
-- TypeScript for type safety
-- Tailwind CSS for styling
-- Framer Motion for animations
-- Three.js for 3D elements
-- Responsive design principles
-
-### Backend (Python + Flask)
-
-- Flask API with CORS support
-- Advanced prediction algorithm with machine-specific coefficients
-- Random seed-based determinism for consistent results
-- Cache prevention mechanisms
+3. Access the application at http://localhost:5173
 
 ## Troubleshooting
 
-### Common Issues
+If you encounter any issues:
 
-1. **"Failed to fetch" errors**:
-   - Make sure the Python API server is running
-   - Check that port 5000 is not in use by another application
-   - Verify there are no firewall restrictions
+1. Make sure all prerequisites are installed correctly
+2. Verify that both Python and Node.js are in your system's PATH
+3. Ensure no other applications are using ports 5173 (frontend) or 8000 (backend)
+4. Check that your virtual environment is activated when running the Python backend
 
-2. **Identical prediction results**:
-   - The application includes cache prevention and randomness to ensure varied results
-   - If you still see identical results, try using a different machine name
+## Project Structure
 
-3. **Command not found errors**:
-   - Make sure Python is in your system PATH
-   - Try running the commands directly: `python predict_api.py` and `npm run dev`
+- `predict_api.py` - Python backend server
+- `src/` - React frontend source code
+- `start_app.bat` - Windows batch file for easy startup
+- `requirements.txt` - Python dependencies
+- `package.json` - Node.js dependencies
 
-## License
+## Support
 
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-## Acknowledgments
-
-- Created for the Tech Sprint project
-- Uses open-source libraries and frameworks 
+If you encounter any issues or have questions, please open an issue in the GitHub repository. 
